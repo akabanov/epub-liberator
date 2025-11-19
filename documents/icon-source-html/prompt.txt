@@ -1,0 +1,27 @@
+Create two HTML files for Flutter app icons (1024x1024px each):
+
+File 1: icon-full.html (Full Version for bigger icons)
+
+Canvas:
+White background
+1024x1024px dark grey square in center with gradient (darker bottom-right: #4a4a4a to #2d2d2d)
+Square edges (no rounded corners)
+No shadows around the square
+`book_outline.png` image as a background (I'll place it next to the html)
+
+Content (centered within front book):
+Wrench icon in sage green (#b8d4b8) - large, prominent, side marging 280, top margin 210 px
+subtle drop shadow
+
+File 2: icon-small.html (for smaller icons generation, for example for browser tabs)
+Same canva, but without the book
+
+Content:
+Only the wrench icon (no text, no background image, same shape as before, but must fill the space with only 15% margins, all sides)
+Wrench in sage green (#b8d4b8), centered, very large
+
+Key Requirements:
+Use icon fonts for both wrench (styled like iOS/Cupertino wrench) and book outlines
+Clean, modern, minimalist design
+Book outlines should clearly frame the content and look like actual books
+Professional app icon aesthetic
