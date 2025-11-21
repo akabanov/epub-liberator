@@ -9,7 +9,6 @@ your books display on your device.
 
 ## Roadmap
 
-- create icons
 - test pwa
 - add links to free EPUBs
 - decide on the domain name (update footer)

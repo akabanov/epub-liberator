@@ -1,19 +1,19 @@
 {
-  "name": "EPUB Formatting Fixer",
+  "name": "EPUB Formatting Liberator",
   "short_name": "EPUB Fixer",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#F9F7F2",
   "theme_color": "#8A9A5B",
-  "description": "Fix broken EPUB formatting and remove annoying styles offline.",
+  "description": "Unlocks line spacing, text alignment, and font size settings in EPUBs for Kobo.",
   "icons": [
     {
-      "src": "icon-192.png",
+      "src": "icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "icon-512.png",
+      "src": "icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
