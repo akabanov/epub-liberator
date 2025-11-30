@@ -279,6 +279,88 @@
         .footer-links a:hover {
             text-decoration: underline;
         }
+
+        /* Cookie Banner */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--text-dark);
+            color: var(--bg-cream);
+            padding: 1rem;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            display: none;
+            /* Hidden by default, JS will show it */
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            text-align: center;
+            border-top: 4px solid var(--accent-orange);
+            box-sizing: border-box;
+        }
+
+        @media (min-width: 600px) {
+            .cookie-banner {
+                flex-direction: row;
+                justify-content: space-between;
+                padding: 1rem 2rem;
+                text-align: left;
+            }
+        }
+
+        .cookie-text {
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            max-width: 800px;
+        }
+
+        @media (min-width: 600px) {
+            .cookie-text {
+                margin-bottom: 0;
+                margin-right: 2rem;
+            }
+        }
+
+        .cookie-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .cookie-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: bold;
+            transition: transform 0.1s, opacity 0.2s;
+        }
+
+        .cookie-btn:active {
+            transform: scale(0.95);
+        }
+
+        .btn-accept {
+            background-color: var(--primary-sage);
+            color: white;
+        }
+
+        .btn-accept:hover {
+            background-color: var(--primary-sage-dark);
+        }
+
+        .btn-decline {
+            background-color: transparent;
+            border: 1px solid var(--text-light);
+            color: var(--text-light);
+        }
+
+        .btn-decline:hover {
+            border-color: white;
+            color: white;
+        }
     </style>
 </head>
 <!-- Google tag (gtag.js) -->
@@ -289,6 +371,12 @@
     function gtag() {
         dataLayer.push(arguments);
     }
+
+    // Default consent to denied
+    gtag('consent', 'default', {
+        'ad_storage': 'denied',
+        'analytics_storage': 'denied'
+    });
 
     gtag('js', new Date());
 
@@ -392,6 +480,17 @@
         Made with ☕ and sarcasm
     </div>
 </footer>
+
+<div id="cookieBanner" class="cookie-banner">
+    <div class="cookie-text">
+        We use cookies. Not the tasty kind, sadly. Just the digital crumbs that tell us if anyone actually uses this
+        thing. Cool?
+    </div>
+    <div class="cookie-buttons">
+        <button id="btnDecline" class="cookie-btn btn-decline">Nah, I'm a ghost</button>
+        <button id="btnAccept" class="cookie-btn btn-accept">Fine, whatever</button>
+    </div>
+</div>
 
 <script>
     const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
@@ -652,6 +751,52 @@
                 .catch((err) => console.log('Service Worker failed:', err));
         });
     }
+</script>
+
+<script>
+    // Cookie Consent Logic
+    (function () {
+        const banner = document.getElementById('cookieBanner');
+        const btnAccept = document.getElementById('btnAccept');
+        const btnDecline = document.getElementById('btnDecline');
+        const STORAGE_KEY = 'cookie_consent';
+
+        function setConsent(granted) {
+            const status = granted ? 'granted' : 'denied';
+            localStorage.setItem(STORAGE_KEY, status);
+
+            // noinspection JSUnresolvedReference
+            if (typeof gtag === 'function') {
+                gtag('consent', 'update', {
+                    'ad_storage': status,
+                    'analytics_storage': status
+                });
+            }
+
+            banner.style.display = 'none';
+        }
+
+        // Check existing consent
+        const savedConsent = localStorage.getItem(STORAGE_KEY);
+
+        if (savedConsent === 'granted') {
+            // noinspection JSUnresolvedReference
+            if (typeof gtag === 'function') {
+                gtag('consent', 'update', {
+                    'ad_storage': 'granted',
+                    'analytics_storage': 'granted'
+                });
+            }
+        } else if (savedConsent === 'denied') {
+            // Already denied, do nothing (default is denied)
+        } else {
+            // No choice made yet, show banner
+            banner.style.display = 'flex';
+        }
+
+        if (btnAccept) btnAccept.addEventListener('click', () => setConsent(true));
+        if (btnDecline) btnDecline.addEventListener('click', () => setConsent(false));
+    })();
 </script>
 
 </body>
