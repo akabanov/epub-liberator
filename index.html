@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <!--suppress HtmlUnknownTag -->
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,9 +35,11 @@
             --card-shadow: 0 10px 25px rgba(138, 154, 91, 0.15);
         }
 
-        html, body {
+        html,
+        body {
             width: 100%;
-            overflow-x: hidden; /* Prevent horizontal scroll */
+            overflow-x: hidden;
+            /* Prevent horizontal scroll */
         }
 
         body {
@@ -48,7 +51,8 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            -webkit-text-size-adjust: 100%; /* Prevent font scaling on mobile */
+            -webkit-text-size-adjust: 100%;
+            /* Prevent font scaling on mobile */
             text-size-adjust: 100%;
         }
 
@@ -191,7 +195,8 @@
         /* Progress Bar */
         .progress-container {
             margin-top: 2rem;
-            display: none; /* Hidden by default */
+            display: none;
+            /* Hidden by default */
         }
 
         .progress-bar-shell {
@@ -274,7 +279,6 @@
         .footer-links a:hover {
             text-decoration: underline;
         }
-
     </style>
 </head>
 <!-- Google tag (gtag.js) -->
@@ -290,6 +294,7 @@
 
     gtag('config', 'G-MNCZGHFB0K');
 </script>
+
 <body>
 
 <header>
@@ -374,7 +379,8 @@
     <div class="links-section">
         <h3>Need books to test?</h3>
         <a href="https://www.gutenberg.org/" target="_blank" class="btn-link">Project Gutenberg</a>
-        <a href="https://standardebooks.org/" target="_blank" class="btn-link">Standard Ebooks (The Gold Standard)</a>
+        <a href="https://standardebooks.org/" target="_blank" class="btn-link">Standard Ebooks (The Gold
+            Standard)</a>
     </div>
 </main>
 
@@ -402,7 +408,7 @@
     const progressBar = document.getElementById('progressBar');
     const statusText = document.getElementById('statusText');
 
-    // Funny status messages
+    // Status messages
     const messages = [
         "Analyzing styling crimes against humanity...",
         "Unfixing fixed sizes...",
@@ -450,6 +456,14 @@
         progressBar.style.width = '0%';
 
         // Start the "Fake" Progress Logic + Real Processing
+        // noinspection JSUnresolvedReference
+        if (typeof gtag === 'function') {
+            // noinspection JSUnresolvedReference
+            gtag('event', 'epub_fix_started', {
+                'event_category': 'engagement',
+                'event_label': 'EPUB Fix Started'
+            });
+        }
         processEpub(file);
     }
 
@@ -553,6 +567,15 @@
                 return zip;
             } catch (e) {
                 console.error(e);
+                // noinspection JSUnresolvedReference
+                if (typeof gtag === 'function') {
+                    // noinspection JSUnresolvedReference
+                    gtag('event', 'epub_fix_failed', {
+                        'event_category': 'engagement',
+                        'event_label': 'EPUB Fix Failed',
+                        'error_message': e.toString()
+                    });
+                }
                 alert("Oops, something broke inside the file parser.");
                 return null;
             }
@@ -591,9 +614,13 @@
             // noinspection JSUnresolvedReference
             if (typeof gtag === 'function') {
                 // noinspection JSUnresolvedReference
-                gtag('event', 'epub_fixed', {
+                gtag('event', 'epub_fix_completed', {
                     'event_category': 'engagement',
-                    'event_label': 'EPUB Fixed'
+                    'event_label': 'EPUB Fixed',
+                    'option_line_height': document.getElementById('fix-line-height').checked,
+                    'option_alignment': document.getElementById('fix-align').checked,
+                    'option_font_size': document.getElementById('fix-fontsize').checked,
+                    'option_ocean': document.getElementById('fix-ocean').checked,
                 });
             }
         }
@@ -611,4 +638,5 @@
 </script>
 
 </body>
+
 </html>
