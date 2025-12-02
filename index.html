@@ -101,24 +101,71 @@
             line-height: 1.6;
         }
 
-        /* AdSense Placeholder */
-        .ad-container {
-            background-color: #eee;
-            width: 100%;
-            height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 20px 0;
-            border: 1px dashed #ccc;
-            color: #999;
-            font-size: 0.8rem;
+        /* Promo Block */
+        .promo-block {
+            background: #faf9f5;
+            border: 1px solid #ebe9e1;
+            border-radius: 10px;
+            padding: 12px;
+            margin: 16px 0;
+            transition: background-color 0.15s ease, border-color 0.15s ease;
         }
 
-        /* INSTRUCTIONS FOR ADSENSE:
-           Paste your <ins class="adsbygoogle" ...></ins> code inside the .ad-container div
-           or replace the div entirely with your ad code.
-        */
+        .promo-block:hover {
+            background: #f5f3ed;
+            border-color: #e4e1d7;
+        }
+
+        .promo-title {
+            margin: 0 0 8px 0;
+            font-size: 1rem;
+            color: var(--primary-sage-dark);
+            font-weight: 600;
+        }
+
+        .promo-body {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .promo-message {
+            margin: 0;
+            color: var(--text-dark);
+            line-height: 1.4;
+        }
+
+        .promo-message a {
+            color: var(--accent-orange-pop);
+            text-decoration: underline;
+        }
+
+        .promo-image {
+            width: 300px;
+            height: auto;
+            max-width: 45vw;
+        }
+
+        .promo-disclaimer {
+            margin-top: 8px;
+            padding-top: 8px;
+            /*border-top: 1px dashed #ddd8c9;*/
+            font-size: 0.8rem;
+            color: #555;
+        }
+
+        /* Responsive: stack image under the text on smaller screens */
+        @media (max-width: 520px) {
+            .promo-body {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .promo-image {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
 
         /* Options Grid */
         .options-container {
@@ -404,13 +451,41 @@
         </p>
     </div>
 
-    <div style="font-size: 0.8rem; color: var(--text-light); margin-top: 5px;">
-        Ad Space: Where the server hamsters take their lunch breaks.
+    <div class="promo-block" id="promoAmazon" role="link" tabindex="0"
+         aria-label="Amazon: Lightning to USB camera adapter">
+        <h3 class="promo-title">Psst!... Did you know?</h3>
+        <div class="promo-body">
+            <p class="promo-message">
+                You can connect your Kobo, a flash drive,
+                or some other dongle straight
+                to an iPhone's Lightning port using a camera adapter.
+                <a href="https://amzn.to/3XwjFuJ" target="_blank"
+                   rel="noopener">Get one from Amazon</a>.
+            </p>
+            <img class="promo-image" src="img/lightning-camera-adapter.png"
+                 alt="Lightning to USB camera adapter" width="300" height="47"/>
+        </div>
+        <div class="promo-disclaimer">Disclosure: As an Amazon Associate I earn from qualifying
+            purchases.
+        </div>
     </div>
-
-    <div class="ad-container">
-
-    </div>
+    <script>
+        (function () {
+            var url = 'https://amzn.to/3XwjFuJ';
+            var el = document.getElementById('promoAmazon');
+            if (!el) return;
+            el.addEventListener('click', function (e) {
+                if (e.target && e.target.closest('a')) return; // follow inner links normally
+                window.open(url, '_blank', 'noopener');
+            });
+            el.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    window.open(url, '_blank', 'noopener');
+                }
+            });
+        })();
+    </script>
 
     <div class="drop-zone" id="dropZone">
         <div class="drop-text">Drop your messed up EPUB here</div>
