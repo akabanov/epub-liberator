@@ -358,22 +358,6 @@
             line-height: 1.5;
         }
 
-        .card-link {
-            display: inline-block;
-            padding: 8px 12px;
-            border-radius: 8px;
-            background: var(--primary-sage);
-            color: #fff;
-            text-decoration: none;
-            font-size: .9rem;
-            transition: background .2s ease;
-        }
-
-        .card-link:hover,
-        .card-link:focus {
-            background: var(--accent-orange-pop);
-        }
-
         .disclaimer {
             font-size: 0.8rem;
             color: #777;
@@ -526,9 +510,9 @@
         </p>
     </div>
 
-    <div class="promo-block" id="promoAmazon" role="link" tabindex="0"
+    <div class="promo-block" id="promoAmazon" tabindex="0"
          aria-label="Amazon: Lightning to USB camera adapter">
-        <h3 class="promo-title">Psst!... Did you know?</h3>
+        <h3 class="promo-title">Psst... Did you know?</h3>
         <div class="promo-body">
             <p class="promo-message">
                 You can connect your Kobo, a flash drive,
@@ -546,8 +530,8 @@
     </div>
     <script>
         (function () {
-            var url = 'https://amzn.to/3XwjFuJ';
-            var el = document.getElementById('promoAmazon');
+            const url = 'https://amzn.to/3XwjFuJ';
+            const el = document.getElementById('promoAmazon');
             if (!el) return;
             el.addEventListener('click', function (e) {
                 if (e.target && e.target.closest('a')) return; // follow inner links normally
@@ -624,7 +608,7 @@
         </p>
 
         <ul class="resource-cards">
-            <li class="resource-card" role="link" tabindex="0">
+            <li class="resource-card" tabindex="0">
                 <div class="site-head">
                     <h4 class="site-title">Project Gutenberg</h4>
                     <a class="site-link" href="https://www.gutenberg.org/" target="_blank" rel="noopener noreferrer" aria-label="Visit Project Gutenberg (opens in a new tab)">Visit site</a>
@@ -632,7 +616,7 @@
                 <div class="site-tagline">Public-domain EPUB classics</div>
                 <p class="site-desc">70,000+ classics in tidy EPUB. Legal, timeless, and pleasantly free of pop‑ups.</p>
             </li>
-            <li class="resource-card" role="link" tabindex="0">
+            <li class="resource-card" tabindex="0">
                 <div class="site-head">
                     <h4 class="site-title">Standard Ebooks</h4>
                     <a class="site-link" href="https://standardebooks.org/" target="_blank" rel="noopener noreferrer" aria-label="Visit Standard Ebooks (opens in a new tab)">Visit site</a>
@@ -640,7 +624,7 @@
                 <div class="site-tagline">Beautifully formatted, proofread</div>
                 <p class="site-desc">Hand‑crafted editions. Like Gutenberg, but ironed, lint‑rolled, and wearing a bow tie.</p>
             </li>
-            <li class="resource-card" role="link" tabindex="0">
+            <li class="resource-card" tabindex="0">
                 <div class="site-head">
                     <h4 class="site-title">ManyBooks</h4>
                     <a class="site-link" href="https://manybooks.net/" target="_blank" rel="noopener noreferrer" aria-label="Visit ManyBooks (opens in a new tab)">Visit site</a>
@@ -648,7 +632,7 @@
                 <div class="site-tagline">Large free catalog</div>
                 <p class="site-desc">Public‑domain and indie titles. Some gems, some… character building. All EPUB‑friendly.</p>
             </li>
-            <li class="resource-card" role="link" tabindex="0">
+            <li class="resource-card" tabindex="0">
                 <div class="site-head">
                     <h4 class="site-title">epubBooks</h4>
                     <a class="site-link" href="https://www.epubbooks.com/" target="_blank" rel="noopener noreferrer" aria-label="Visit epubBooks (opens in a new tab)">Visit site</a>
@@ -656,7 +640,7 @@
                 <div class="site-tagline">Curated free classics</div>
                 <p class="site-desc">Clean layouts, easy downloads, zero drama. Your e‑reader will send a thank‑you note.</p>
             </li>
-            <li class="resource-card" role="link" tabindex="0">
+            <li class="resource-card" tabindex="0">
                 <div class="site-head">
                     <h4 class="site-title">Baen Free Library</h4>
                     <a class="site-link" href="https://www.baen.com/allbooks/category/index/id/2012" target="_blank" rel="noopener noreferrer" aria-label="Visit Baen Free Library (opens in a new tab)">Visit site</a>
@@ -664,7 +648,7 @@
                 <div class="site-tagline">Free SF/F from the publisher</div>
                 <p class="site-desc">Spaceships, sorcery, and snark. DRM‑free EPUBs straight from the publisher. Pew pew.</p>
             </li>
-            <li class="resource-card" role="link" tabindex="0">
+            <li class="resource-card" tabindex="0">
                 <div class="site-head">
                     <h4 class="site-title">Open Library</h4>
                     <a class="site-link" href="https://openlibrary.org/" target="_blank" rel="noopener noreferrer" aria-label="Visit Open Library (opens in a new tab)">Visit site</a>
@@ -675,11 +659,11 @@
         </ul>
     </div>
     <script>
-        // Make whole resource card clickable (not just the right-aligned hyperlink)
+        // Make the whole resource card clickable (not just the right-aligned hyperlink)
         (function () {
-            var cards = document.querySelectorAll('.resource-card');
+            const cards = document.querySelectorAll('.resource-card');
             cards.forEach(function (card) {
-                var link = card.querySelector('.site-link');
+                const link = card.querySelector('.site-link');
                 if (!link) return;
 
                 // Click anywhere on the card opens the link, except when clicking an actual anchor inside
